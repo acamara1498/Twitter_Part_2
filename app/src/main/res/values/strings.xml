@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Twitter</string>
+    <string name="login_label">Log in</string>
+    <string name="intent_scheme">oauth</string>
+    <string name="intent_host">cprest</string>
+    <string name="user_name">User\'s Name</string>
+    <string name="screen_name">Handle</string>
+    <string name="relative_timestamp">Rel Time</string>
+    <string name="body_of_tweet">Tweet body...</string>
+
+</resources>
