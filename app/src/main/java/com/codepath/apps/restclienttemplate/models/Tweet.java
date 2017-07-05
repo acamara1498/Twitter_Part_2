@@ -65,12 +65,6 @@ public class Tweet {
         relativeDate = relativeDate.replaceAll(" days","d");
         relativeDate = relativeDate.replaceAll(" day","d");
 
-
-
-
-
-
-
         return relativeDate;
     }
 }

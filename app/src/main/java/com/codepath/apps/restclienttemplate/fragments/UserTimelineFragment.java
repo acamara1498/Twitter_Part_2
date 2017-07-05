@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
 public class UserTimelineFragment extends TweetsListFragments {
 
     TwitterClient client;
-
+    String screenName;
     public static UserTimelineFragment newInstance(String screenName){
         UserTimelineFragment userTimelineFragment = new UserTimelineFragment();
         Bundle args = new Bundle();
@@ -38,7 +38,7 @@ public class UserTimelineFragment extends TweetsListFragments {
 
     private void populateTimeline() {
         // comes from activity
-        String screenName = getArguments().getString("screen_name");
+        screenName = getArguments().getString("screen_name");
         client.getUserTimeline(screenName, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -67,6 +67,42 @@ public class UserTimelineFragment extends TweetsListFragments {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d("TwitterClient", responseString);
                 throwable.printStackTrace();
+            }
+        });
+    }
+
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+        // getHomeTimeline is an example endpoint.
+
+        client.getUserTimeline(page, screenName, new JsonHttpResponseHandler(){
+
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                // Remember to CLEAR OUT old items before appending in the new ones
+                tweetAdapter.clear();
+                // ...the data has come back, add new items to your adapter.
+                fetchTweets(response);
+                // Now we call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("TwitterClient", errorResponse.toString());
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
     }

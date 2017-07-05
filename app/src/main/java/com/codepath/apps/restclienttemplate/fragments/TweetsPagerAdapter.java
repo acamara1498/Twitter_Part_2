@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-    private String tabTitles[] = new String [] {"Home", "Mentions"};
+    private String tabTitles[] = new String [] {"Home", "Search", "Mentions", "Messages"};
     private Context context;
     public ConcurrentHashMap<Integer, TweetsListFragments> mPageReferenceMap = new ConcurrentHashMap();
 
@@ -38,13 +38,19 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
             mPageReferenceMap.put(position, r);
             return r;
 
-        } else if (position == 1)
-        {
+        } else if (position == 1) {
             MentionsTimelineFragment r = new MentionsTimelineFragment();
             mPageReferenceMap.put(position, r);
             return r;
-        } else
-        {
+        } else if (position == 2) {
+            MentionsTimelineFragment r = new MentionsTimelineFragment();
+            mPageReferenceMap.put(position, r);
+            return r;
+        } else if (position == 3) {
+            MentionsTimelineFragment r = new MentionsTimelineFragment();
+            mPageReferenceMap.put(position, r);
+            return r;
+        } else {
             return null;
         }
 
@@ -54,6 +60,6 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         // generate title based on item position
-        return tabTitles[position];
+        return null;
     }
 }

@@ -23,6 +23,13 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     ViewPager vpPager;
 
+    private int[] tabIconsSelected = {
+            R.drawable.ic_vector_home,
+            R.drawable.ic_vector_search,
+            R.drawable.ic_vector_notifications,
+            R.drawable.ic_vector_messages
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,11 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         // setup the tab layour to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
+
+        tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
+        tabLayout.getTabAt(1).setIcon(tabIconsSelected[1]);
+        tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
+        tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
 
 
         findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
@@ -63,7 +75,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     @Override
     public void onTweetSelected(Tweet tweet) {
-        Toast.makeText(this, tweet.body, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
 
     @Override
