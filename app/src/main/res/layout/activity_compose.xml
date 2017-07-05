@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.apps.restclienttemplate.ComposeActivity">
+
+
+    <ImageButton
+        android:id="@+id/ibExit"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        app:srcCompat="@drawable/close" />
+
+    <ImageView
+        android:id="@+id/ivProfileCompose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignBottom="@+id/ibExit"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@android:color/holo_orange_dark" />
+
+    <EditText
+        android:id="@+id/etCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ibExit"
+        android:ems="10"
+        android:hint="What's happening?"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnBeep"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:clickable="true"
+        android:onClick="makeBeep"
+        android:text="Beep"
+        android:textColor="@android:color/white"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/tvCharCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnBeep"
+        android:layout_alignBottom="@+id/btnBeep"
+        android:layout_toStartOf="@+id/btnBeep"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="140"
+        android:textSize="14dp" />
+</RelativeLayout>
+

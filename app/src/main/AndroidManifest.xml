@@ -35,6 +35,10 @@
         </activity>
         <activity android:name=".TimelineActivity" />
         <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ComposeActivity"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+
     </application>
 
 </manifest>

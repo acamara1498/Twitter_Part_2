@@ -4,6 +4,7 @@ import android.text.format.DateUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import java.util.Locale;
  * Created by acamara on 7/3/17.
  */
 
+@Parcel
 public class Tweet {
     //list out the attributes
     public String body;

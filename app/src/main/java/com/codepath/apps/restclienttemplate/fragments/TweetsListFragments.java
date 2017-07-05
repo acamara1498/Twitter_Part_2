@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +40,9 @@ public class TweetsListFragments extends Fragment implements TweetAdapter.TweetA
         View v = inflater.inflate(R.layout.fragments_tweets_list, container, false);
 
         rvTweets = (RecyclerView) v.findViewById(R.id.rvTweet);
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        rvTweets.addItemDecoration(itemDecoration);
         tweets = new ArrayList<>();
         tweetAdapter = new TweetAdapter(tweets, this);
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -66,4 +70,12 @@ public class TweetsListFragments extends Fragment implements TweetAdapter.TweetA
         Tweet tweet = tweets.get(position);
         ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
     }
+
+    public void postedTweet(Tweet tweet)
+    {
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.getLayoutManager().scrollToPosition(0);
+    }
+
 }
