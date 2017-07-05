@@ -27,7 +27,8 @@ public class TweetsListFragments extends Fragment implements TweetAdapter.TweetA
 
     public interface TweetSelectedListener {
         // handle tweet selection
-        public  void onTweetSelected(Tweet tweet);
+        public void onTweetSelected(Tweet tweet);
+        public void postedTweet(Tweet tweet);
     }
 
     TweetAdapter tweetAdapter;

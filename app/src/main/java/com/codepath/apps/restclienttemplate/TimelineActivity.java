@@ -21,13 +21,15 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     public static final int REQUEST_CODE = 20;
     public static final int RESULT_CODE = 10;
 
+    ViewPager vpPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
         // get the view pager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
 
         // set the adapter for the pager
         vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager(), this));
@@ -35,6 +37,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         // setup the tab layour to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
+
 
         findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +67,19 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     }
 
     @Override
+    public void postedTweet(Tweet tweet) {
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+
             // Extract name value from result extras
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
 
-            // TODO - TweetsListFragments.postedTweet();
+            ((TweetsPagerAdapter) vpPager.getAdapter()).mPageReferenceMap.get(0).postedTweet(tweet);
 
             // Toast the name to display temporarily on screen
             Toast.makeText(this, "Tweet sent!", Toast.LENGTH_SHORT).show();

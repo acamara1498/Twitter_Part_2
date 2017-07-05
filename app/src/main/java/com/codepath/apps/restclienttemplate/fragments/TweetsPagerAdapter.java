@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Created by acamara on 7/3/17.
  */
@@ -13,6 +15,7 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
     private String tabTitles[] = new String [] {"Home", "Mentions"};
     private Context context;
+    public ConcurrentHashMap<Integer, TweetsListFragments> mPageReferenceMap = new ConcurrentHashMap();
 
     public TweetsPagerAdapter(FragmentManager fm, Context context)
     {
@@ -23,7 +26,7 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
     //return total # of fragments
     @Override
     public int getCount() {
-        return 2;
+        return tabTitles.length;
     }
 
     //return the fragment to use depending on the position
@@ -31,11 +34,15 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0)
         {
-            return new HomeTimelineFragment();
+            HomeTimelineFragment r = new HomeTimelineFragment();
+            mPageReferenceMap.put(position, r);
+            return r;
 
         } else if (position == 1)
         {
-            return new MentionsTimelineFragment();
+            MentionsTimelineFragment r = new MentionsTimelineFragment();
+            mPageReferenceMap.put(position, r);
+            return r;
         } else
         {
             return null;
