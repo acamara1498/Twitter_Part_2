@@ -1,26 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.design.widget.CoordinatorLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/appbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:fitsSystemWindows="true">-->
+
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:id="@+id/collapsing_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:contentScrim="?attr/colorPrimary"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+            <!--&gt;-->
+
+
+
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize">-->
+                <!--&lt;!&ndash;app:popupTheme="YOUR POPUP THEME"&ndash;&gt;-->
+
+            <!--</android.support.v7.widget.Toolbar>-->
+
+
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+
+
+        <!--</android.support.design.widget.AppBarLayout>-->
+
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/sliding_tabs"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/toolbar"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--app:tabGravity="fill"-->
+            <!--app:tabIndicatorColor="@android:color/black"-->
+            <!--app:tabMode="fixed">-->
+
+        <!--</android.support.design.widget.TabLayout>-->
+
+    <!--</RelativeLayout>-->
+
+
+<!--</android.support.design.widget.CoordinatorLayout>-->
+
+
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android.support.design="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/white"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:titleTextColor="@android:color/black">
 
-    <!--<android.support.design.widget.CoordinatorLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/white"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:titleTextColor="@android:color/black">
-
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_alignParentStart="true"
@@ -28,7 +93,6 @@
 
                 <ImageButton
                     android:id="@+id/ibProfile"
-                    android:onClick=""
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="5dp"
@@ -36,21 +100,22 @@
                     android:background="@android:color/transparent"
                     app:srcCompat="@android:color/transparent" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="49dp"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center_vertical"
-                    android:text="Home"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvActivityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:text="Home"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
+
 
         <LinearLayout
             android:id="@+id/llTabs"
@@ -76,20 +141,18 @@
             </android.support.v4.view.ViewPager>
 
         </LinearLayout>
-    <!--</android.support.design.widget.CoordinatorLayout>-->
 
-
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/ibCompose"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="right"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/circle"
-        android:elevation="0dp"
-        android:gravity="center_vertical|center_horizontal"
-        app:srcCompat="@drawable/compose" />
-</RelativeLayout>
+        android:src="@drawable/ic_vector_compose"
+        app:backgroundTint="@android:color/holo_orange_dark"
+        app:fabSize="normal" />
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

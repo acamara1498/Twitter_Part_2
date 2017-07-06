@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.Toolbar;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,14 +14,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-    private String tabTitles[] = new String [] {"Home", "Search", "Mentions", "Messages"};
+    public static String tabTitles[] = new String [] {"Home", "Search", "Mentions", "Messages"};
     private Context context;
+    Toolbar toolbar;
     public ConcurrentHashMap<Integer, TweetsListFragments> mPageReferenceMap = new ConcurrentHashMap();
 
     public TweetsPagerAdapter(FragmentManager fm, Context context)
     {
         super(fm);
         this.context = context;
+
     }
 
     //return total # of fragments
@@ -47,7 +50,7 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
             mPageReferenceMap.put(position, r);
             return r;
         } else if (position == 3) {
-            MentionsTimelineFragment r = new MentionsTimelineFragment();
+            DirectMessagesFragment r = new DirectMessagesFragment();
             mPageReferenceMap.put(position, r);
             return r;
         } else {

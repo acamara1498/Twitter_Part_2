@@ -10,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -59,14 +59,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-//        // Find the toolbar view inside the activity layout
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        // Sets the Toolbar to act as the ActionBar for this Activity window.
-//        toolbar.setTitle("Home");
-//        // Make sure the toolbar exists in the activity and is not null
-//        setSupportActionBar(toolbar);
-
         context = this;
+        final TextView tvActivityTitle = (TextView) findViewById(R.id.tvActivityTitle);
         ibProfile = (ImageButton) findViewById(R.id.ibProfile);
 
         client = TwitterApp.getRestClient();
@@ -118,15 +112,32 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
         tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
 
-
-        findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
-                overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+            public void onTabSelected(TabLayout.Tab tab) {
+                tvActivityTitle.setText(TweetsPagerAdapter.tabTitles[tab.getPosition()]);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
+
+
+//        findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+//                startActivityForResult(intent, REQUEST_CODE);
+//                overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+//            }
+//        });
 
 
         //TODO below

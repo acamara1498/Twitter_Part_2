@@ -14,10 +14,10 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by acamara on 7/3/17.
+ * Created by acamara on 7/6/17.
  */
 
-public class HomeTimelineFragment extends TweetsListFragments {
+public class DirectMessagesFragment extends TweetsListFragments {
 
     TwitterClient client;
 
@@ -26,12 +26,11 @@ public class HomeTimelineFragment extends TweetsListFragments {
         super.onCreate(savedInstanceState);
         client = TwitterApp.getRestClient();
         populateTimeline();
-
     }
 
     private void populateTimeline() {
 
-        client.getHomeTimeline(new JsonHttpResponseHandler(){
+        client.getDMs(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("TwitterClient", response.toString());
@@ -69,7 +68,7 @@ public class HomeTimelineFragment extends TweetsListFragments {
         // `client` here is an instance of Android Async HTTP
         // getHomeTimeline is an example endpoint.
 
-        client.getHomeTimeline(page, new JsonHttpResponseHandler(){
+        client.getDMs(new JsonHttpResponseHandler(){
 
 
             @Override
@@ -103,7 +102,7 @@ public class HomeTimelineFragment extends TweetsListFragments {
     public void loadNextDataFromApi(int offset) {
         // Send an API request to retrieve appropriate paginated data
         long lastId = tweets.get(tweets.size() - 1).uid;
-        client.getHomeTimeline(lastId, new JsonHttpResponseHandler() {
+        client.getDMs(new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {

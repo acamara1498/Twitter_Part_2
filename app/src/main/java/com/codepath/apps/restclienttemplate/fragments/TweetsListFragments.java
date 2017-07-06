@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.codepath.apps.restclienttemplate.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TweetAdapter;
+import com.codepath.apps.restclienttemplate.TwitterClient;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.json.JSONArray;
@@ -37,6 +38,7 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    TwitterClient client;
     public EndlessRecyclerViewScrollListener scrollListener;
     public SwipeRefreshLayout swipeContainer;
 
@@ -76,7 +78,7 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
-                //loadNextDataFromApi(page);
+                loadNextDataFromApi(page);
             }
 
 
@@ -86,6 +88,8 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
 
         return v;
     }
+
+    public abstract void loadNextDataFromApi(int offset);
 
     public void addItems (JSONArray response){
         Tweet tweet = null;
