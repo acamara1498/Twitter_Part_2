@@ -25,6 +25,7 @@ public class MentionsTimelineFragment extends TweetsListFragments {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         client = TwitterApp.getRestClient();
+
         populateTimeline();
     }
 

@@ -64,13 +64,13 @@ public class ComposeActivity extends AppCompatActivity {
         ivProfileCompose = (ImageView) findViewById(R.id.ivProfileCompose);
 
         client = TwitterApp.getRestClient();
-        client.getOwnProfile(new JsonHttpResponseHandler() {
+        client.getUserInfo(new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    String profilePicURL = response.getString("profile_image_url_https");
+                    String profilePicURL = response.getString("profile_image_url");
                     Glide.with(context)
                             .load(profilePicURL)
                             .bitmapTransform(new RoundedCornersTransformation(context, 50, 0))

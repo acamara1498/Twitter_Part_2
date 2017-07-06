@@ -1,27 +1,44 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragments;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
+
+import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragments.TweetSelectedListener {
 
     public static final int REQUEST_CODE = 20;
-    public static final int RESULT_CODE = 10;
 
     ViewPager vpPager;
+    private Toolbar toolbar;
+    TwitterClient client;
+    ImageButton ibProfile;
+    Context context;
+
+
 
     private int[] tabIconsSelected = {
             R.drawable.ic_vector_home,
@@ -30,10 +47,61 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
             R.drawable.ic_vector_messages
     };
 
+    private int[] tabIconsNotSelected = {
+            R.drawable.ic_vector_home_stroke,
+            R.drawable.ic_vector_search_stroke,
+            R.drawable.ic_vector_notifications_stroke,
+            R.drawable.ic_vector_messages_stroke
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+//        // Find the toolbar view inside the activity layout
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        // Sets the Toolbar to act as the ActionBar for this Activity window.
+//        toolbar.setTitle("Home");
+//        // Make sure the toolbar exists in the activity and is not null
+//        setSupportActionBar(toolbar);
+
+        context = this;
+        ibProfile = (ImageButton) findViewById(R.id.ibProfile);
+
+        client = TwitterApp.getRestClient();
+        client.getUserInfo(new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    String profilePicURL = response.getString("profile_image_url");
+                    Glide.with(context)
+                            .load(profilePicURL)
+                            .bitmapTransform(new RoundedCornersTransformation(context, 100, 0))
+                            .into(ibProfile);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("TwitterClient", errorResponse.toString());
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
 
         // get the view pager
         vpPager = (ViewPager) findViewById(R.id.viewpager);
@@ -59,7 +127,17 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
                 overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
             }
         });
+
+
+        //TODO below
+//        ibProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onProfileView();
+//            }
+//        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,9 +145,16 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         return true;
     }
 
+
     public void onProfileView(MenuItem item) {
         Intent i = new Intent(this, ProfileActivity.class);
 
+        startActivity(i);
+    }
+
+    public void onImageSelected(Tweet tweet) {
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("screen_name", tweet.user.screenName);
         startActivity(i);
     }
 

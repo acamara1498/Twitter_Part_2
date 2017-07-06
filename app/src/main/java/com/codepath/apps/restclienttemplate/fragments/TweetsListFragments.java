@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.apps.restclienttemplate.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TweetAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -29,12 +30,14 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
     public interface TweetSelectedListener {
         // handle tweet selection
         public void onTweetSelected(Tweet tweet);
+        public void onImageSelected(Tweet tweet);
         public void postedTweet(Tweet tweet);
     }
 
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    public EndlessRecyclerViewScrollListener scrollListener;
     public SwipeRefreshLayout swipeContainer;
 
     @Nullable
@@ -50,6 +53,8 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
         tweetAdapter = new TweetAdapter(tweets, this);
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTweets.setAdapter(tweetAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
 
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
@@ -64,10 +69,20 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_orange_dark);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                //loadNextDataFromApi(page);
+            }
+
+
+        };
+        // Adds the scroll listener to RecyclerView
+        rvTweets.addOnScrollListener(scrollListener);
 
         return v;
     }
@@ -87,9 +102,13 @@ public abstract class TweetsListFragments extends Fragment implements TweetAdapt
     }
 
     @Override
-    public void onItemSelected(View view, int position) {
+    public void onItemSelected(View view, int position, boolean isPic) {
         Tweet tweet = tweets.get(position);
-        ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
+        if (!isPic) {
+            ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
+        } else {
+            ((TweetSelectedListener) getActivity()).onImageSelected(tweet);
+        }
     }
 
     public void postedTweet(Tweet tweet)

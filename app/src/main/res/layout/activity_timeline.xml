@@ -2,29 +2,82 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android.support.design="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <!--<android.support.design.widget.CoordinatorLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/sliding_tabs"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:titleTextColor="@android:color/black">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
+
+                <ImageButton
+                    android:id="@+id/ibProfile"
+                    android:onClick=""
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@android:color/transparent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="49dp"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center_vertical"
+                    android:text="Home"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/llTabs"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:background="@android:color/white" >
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical">
 
-        </android.support.v4.view.ViewPager>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/sliding_tabs"
+                android:layout_width="match_parent"
+                android:background="@android:color/white"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed" />
 
-    </LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:background="@android:color/white">
+
+            </android.support.v4.view.ViewPager>
+
+        </LinearLayout>
+    <!--</android.support.design.widget.CoordinatorLayout>-->
+
 
     <ImageButton
         android:id="@+id/ibCompose"

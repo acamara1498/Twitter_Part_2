@@ -34,7 +34,7 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
-        tweet.relativeDate = " • "+ getRelativeTimeAgo(tweet.createdAt); //TODO - Change the relative date into the correct format
+        tweet.relativeDate = " · "+ getRelativeTimeAgo(tweet.createdAt); //TODO - Change the relative date into the correct format
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
 
 

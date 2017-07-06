@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.util.TextUtils;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -40,23 +41,49 @@ public class ProfileActivity extends AppCompatActivity {
         ft.commit();
 
         client = TwitterApp.getRestClient();
-        client.getUserInfo(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //deserialize the useer object
-                try {
-                    User user = User.fromJSON(response);
-                    //Ser the title of the actionbar based on the user information
-                    getSupportActionBar().setTitle(user.screenName);
-                    //populate user headline
-                    populateUserHeadline(user);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (TextUtils.isEmpty(screenName)) {
+            client.getUserInfo(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //deserialize the useer object
+                    try {
+                        User user = User.fromJSON(response);
+                        //Ser the title of the actionbar based on the user information
+                        //getSupportActionBar().setTitle(user.screenName);
+                        //populate user headline
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
+        }else{
+
+            client.getOtherUserInfo(screenName,new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //deserialize the useer object
+                    try {
+                        User user = User.fromJSON(response);
+                        //Ser the title of the actionbar based on the user information
+                        //getSupportActionBar().setTitle(user.screenName);
+                        //populate user headline
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }
 
-
-            }
-        });
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
+            });
+        }
     }
 
     public void populateUserHeadline(User user) {
@@ -74,7 +101,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(user.profileImageUrl)
-                .bitmapTransform(new RoundedCornersTransformation(this, 75, 0))
+                .bitmapTransform(new RoundedCornersTransformation(this, 200, 0))
                 .into(ivProfileImage);
     }
 }

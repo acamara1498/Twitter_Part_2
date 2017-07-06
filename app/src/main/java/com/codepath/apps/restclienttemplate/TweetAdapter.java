@@ -27,7 +27,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     //declare an interface required by the viewHolder
     public interface TweetAdapterListener{
-        public void onItemSelected(View view, int position);
+        public void onItemSelected(View view, int position, boolean isPic);
     }
 
     //pass in the Tweets array in the constructor
@@ -63,7 +63,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     //bind the values based on the position of the element
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         // get data according to position
         Tweet tweet = tweets.get(position);
 
@@ -71,12 +71,24 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         //populate the views according to this data
         holder.tvUserName.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
-        holder.tvHandle.setText(tweet.user.screenName);
+        holder.tvHandle.setText("@" + tweet.user.screenName);
         holder.tvTimeStamp.setText(tweet.relativeDate);
+
+
+
+        holder.ivProfileImage.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                // adapter to tell fragment to tell activity
+                listener.onItemSelected(v, position, true);
+
+            }
+        });
 
         Glide.with(context)
                 .load(tweet.user.profileImageUrl)
-                .bitmapTransform(new RoundedCornersTransformation(context, 50,0))
+                .bitmapTransform(new RoundedCornersTransformation(context, 150,0))
                 .into(holder.ivProfileImage);
 
     }
@@ -118,7 +130,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         //get the position of row element
                         int position = getAdapterPosition();
                         // fire the listener callback
-                        listener.onItemSelected(view, position);
+                        listener.onItemSelected(view, position, false);
                     }
                 }
             });

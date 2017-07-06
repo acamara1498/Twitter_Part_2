@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
+        android:clickable="true"
         app:srcCompat="@android:color/black"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -70,14 +71,14 @@
         android:layout_height="20dp"
         android:layout_alignLeft="@+id/ibReply"
         android:layout_below="@+id/tvBody"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="60dp"
-        android:alpha=".5"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:alpha=".5"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:visibility="visible"
-        app:srcCompat="@drawable/notliked" />
+        app:srcCompat="@drawable/ic_vector_heart_stroke" />
 
     <TextView
         android:id="@+id/tvLikeCounter"
@@ -91,13 +92,13 @@
         android:id="@+id/ibRT"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="50dp"
-        android:background="@android:color/transparent"
-        android:alpha=".5"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/notretweeted"
         android:layout_alignBottom="@+id/tvRtCounter"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:alpha=".5"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke" />
 
     <TextView
         android:id="@+id/tvRtCounter"
@@ -112,9 +113,9 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignTop="@+id/tvLikeCounter"
-        android:alpha=".5"
         android:layout_marginLeft="50dp"
         android:layout_toEndOf="@+id/tvRtCounter"
+        android:alpha=".5"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_vector_messages_stroke" />
