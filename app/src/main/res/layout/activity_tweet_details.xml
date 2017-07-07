@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.apps.restclienttemplate.TweetDetails">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tweetToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:titleTextColor="@android:color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_vector_close" />
+
+            <TextView
+                android:id="@+id/tvActivityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
+                android:text="Tweets"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/ivReply"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@android:color/background_dark"
+        android:layout_below="@+id/tweetToolbar"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tvUserName2"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_above="@+id/tvHandle2"
+        android:layout_toEndOf="@+id/ivReply"
+        android:text="User's Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvHandle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Handle"
+        android:layout_above="@+id/tvBody2"
+        android:layout_toEndOf="@+id/ivReply" />
+
+    <TextView
+        android:id="@+id/tvBody2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivReply"
+        android:text="Tweet body..."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvBody2"
+        android:text="Time Posted" />
+
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="Reply"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@android:color/holo_orange_dark"
+        android:clickable="true"
+        android:onClick="makeReply"
+        android:textColor="@android:color/white"
+        android:textSize="14dp"/>
+
+    <TextView
+        android:id="@+id/tvCharCount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnReply"
+        android:layout_alignBottom="@+id/btnReply"
+        android:layout_toStartOf="@+id/btnReply"
+        android:text="140" />
+
+    <EditText
+        android:id="@+id/etCompose2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnReply"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:hint="Tweet your reply"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/tvWhoReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etCompose2"
+        android:layout_alignParentStart="true"
+        android:text="Replying to...." />
+
+</RelativeLayout>

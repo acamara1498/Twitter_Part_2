@@ -127,6 +127,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/reply"
+        android:clickable="false"
         android:layout_alignTop="@+id/ibLike"
         android:layout_toEndOf="@+id/ivProfileImage" />
 

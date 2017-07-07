@@ -34,11 +34,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".TimelineActivity" />
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".ComposeActivity"
+        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".ComposeActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".TweetDetails"
             android:windowSoftInputMode="adjustResize">
         </activity>
-
     </application>
 
 </manifest>

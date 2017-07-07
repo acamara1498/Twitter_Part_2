@@ -42,7 +42,6 @@ public class ComposeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(android.R.style.Theme_DeviceDefault_Light_NoActionBar);
         setContentView(R.layout.activity_compose);
 
         etCompose = (EditText) findViewById(R.id.etCompose);

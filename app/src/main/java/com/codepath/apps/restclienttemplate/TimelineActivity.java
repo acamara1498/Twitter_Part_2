@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,21 +131,30 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         });
 
 
-//        findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ibCompose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
+                overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
+            }
+        });
+
+        findViewById(R.id.ibProfile).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+                startActivity(i);
+            }
+        } );
+
+                //TODO
+//        findViewById(R.id.ibReply).setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
-//                startActivityForResult(intent, REQUEST_CODE);
-//                overridePendingTransition(R.anim.slide_in_up, R.anim.stay);
-//            }
-//        });
-
-
-        //TODO below
-//        ibProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onProfileView();
+//
+//                onTweetSelected();
+//
 //            }
 //        });
     }
@@ -155,6 +165,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
         return true;
     }
+
 
 
     public void onProfileView(MenuItem item) {
@@ -171,8 +182,17 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     @Override
     public void onTweetSelected(Tweet tweet) {
-        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, TweetDetails.class);
+        intent.putExtra("screen_name", tweet.user.screenName);
+        intent.putExtra("name", tweet.user.name);
+        intent.putExtra("body", tweet.body);
+        intent.putExtra("profileImageUrl", tweet.user.profileImageUrl);
+        intent.putExtra("createdAt", tweet.createdAt);
+        startActivity(intent);
+//        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
+
+
 
     @Override
     public void postedTweet(Tweet tweet) {
