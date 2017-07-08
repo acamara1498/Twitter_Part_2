@@ -29,7 +29,7 @@ public class HomeTimelineFragment extends TweetsListFragments {
 
     }
 
-    private void populateTimeline() {
+    public void populateTimeline() {
 
         client.getHomeTimeline(new JsonHttpResponseHandler(){
             @Override

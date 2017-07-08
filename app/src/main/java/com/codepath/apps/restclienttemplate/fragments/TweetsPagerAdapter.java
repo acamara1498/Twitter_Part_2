@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-    public static String tabTitles[] = new String [] {"Home", "Search", "Mentions", "Messages"};
+    public static String tabTitles[] = new String [] {"Home", "Mentions"};
     private Context context;
     Toolbar toolbar;
     public ConcurrentHashMap<Integer, TweetsListFragments> mPageReferenceMap = new ConcurrentHashMap();
@@ -43,14 +43,6 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
         } else if (position == 1) {
             MentionsTimelineFragment r = new MentionsTimelineFragment();
-            mPageReferenceMap.put(position, r);
-            return r;
-        } else if (position == 2) {
-            MentionsTimelineFragment r = new MentionsTimelineFragment();
-            mPageReferenceMap.put(position, r);
-            return r;
-        } else if (position == 3) {
-            DirectMessagesFragment r = new DirectMessagesFragment();
             mPageReferenceMap.put(position, r);
             return r;
         } else {

@@ -51,15 +51,17 @@
         android:id="@+id/ivReply"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:srcCompat="@android:color/background_dark"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/tweetToolbar"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="10dp"
+        app:srcCompat="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/tvUserName2"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_above="@+id/tvHandle2"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/ivReply"
         android:text="User's Name"
         android:textColor="@android:color/black"
@@ -70,9 +72,10 @@
         android:id="@+id/tvHandle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Handle"
         android:layout_above="@+id/tvBody2"
-        android:layout_toEndOf="@+id/ivReply" />
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/ivReply"
+        android:text="Handle" />
 
     <TextView
         android:id="@+id/tvBody2"
@@ -80,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivReply"
+        android:layout_margin="10dp"
         android:text="Tweet body..."
         android:textSize="20sp" />
 
@@ -89,21 +93,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvBody2"
+        android:layout_marginLeft="10dp"
         android:text="Time Posted" />
 
     <Button
         android:id="@+id/btnReply"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="Reply"
+        android:layout_marginLeft="5dp"
         android:background="@drawable/rounded"
-        android:backgroundTint="@android:color/holo_orange_dark"
+        android:backgroundTint="#4099ff"
         android:clickable="true"
         android:onClick="makeReply"
+        android:text="Reply"
         android:textColor="@android:color/white"
-        android:textSize="14dp"/>
+        android:textSize="14dp" />
 
     <TextView
         android:id="@+id/tvCharCount2"
@@ -120,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnReply"
         android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
         android:ems="10"
         android:hint="Tweet your reply"
         android:inputType="textMultiLine" />
@@ -130,6 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/etCompose2"
         android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
         android:text="Replying to...." />
 
 </RelativeLayout>

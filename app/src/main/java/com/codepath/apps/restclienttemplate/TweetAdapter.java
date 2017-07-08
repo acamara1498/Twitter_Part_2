@@ -81,7 +81,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 // adapter to tell fragment to tell activity
-                listener.onItemSelected(v, position, true);
+                listener.
+                        onItemSelected(v, position, true);
 
             }
         });
@@ -129,6 +130,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     if (listener != null) {
                         //get the position of row element
                         int position = getAdapterPosition();
+
                         // fire the listener callback
                         listener.onItemSelected(view, position, false);
                     }

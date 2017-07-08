@@ -28,7 +28,7 @@ public class DirectMessagesFragment extends TweetsListFragments {
         populateTimeline();
     }
 
-    private void populateTimeline() {
+    public void populateTimeline() {
 
         client.getDMs(new JsonHttpResponseHandler(){
             @Override
@@ -99,37 +99,5 @@ public class DirectMessagesFragment extends TweetsListFragments {
         });
     }
 
-    public void loadNextDataFromApi(int offset) {
-        // Send an API request to retrieve appropriate paginated data
-        long lastId = tweets.get(tweets.size() - 1).uid;
-        client.getDMs(new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                fetchTweets(response);
-                // Now we call setRefreshing(false) to signal refresh has finished
-                swipeContainer.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-                Log.d("TwitterClient", errorResponse.toString());
-                throwable.printStackTrace();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-        });
-
-        populateTimeline();
-    }
 
 }

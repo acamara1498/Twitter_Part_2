@@ -38,14 +38,14 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     TwitterClient client;
     ImageButton ibProfile;
     Context context;
+//    ScrollableLayout scrollableLayout  = findView(R.id.scrollable_layout);
+
 
 
 
     private int[] tabIconsSelected = {
             R.drawable.ic_vector_home,
-            R.drawable.ic_vector_search,
-            R.drawable.ic_vector_notifications,
-            R.drawable.ic_vector_messages
+            R.drawable.ic_vector_notifications
     };
 
     private int[] tabIconsNotSelected = {
@@ -110,8 +110,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
         tabLayout.getTabAt(0).setIcon(tabIconsSelected[0]);
         tabLayout.getTabAt(1).setIcon(tabIconsSelected[1]);
-        tabLayout.getTabAt(2).setIcon(tabIconsSelected[2]);
-        tabLayout.getTabAt(3).setIcon(tabIconsSelected[3]);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -148,15 +146,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
             }
         } );
 
-                //TODO
-//        findViewById(R.id.ibReply).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                onTweetSelected();
-//
-//            }
-//        });
+
     }
 
 
@@ -188,7 +178,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         intent.putExtra("body", tweet.body);
         intent.putExtra("profileImageUrl", tweet.user.profileImageUrl);
         intent.putExtra("createdAt", tweet.createdAt);
-        startActivity(intent);
+        intent.putExtra("tweet_id", (long) tweet.uid);
+        startActivityForResult(intent, REQUEST_CODE);
 //        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
 

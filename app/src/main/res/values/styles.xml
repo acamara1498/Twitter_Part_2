@@ -6,9 +6,9 @@
         <item name="android:textColorPrimaryInverse">@android:color/white</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textColorSecondaryInverse">@android:color/white</item>
-        <item name="colorAccent">@android:color/holo_orange_dark</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_bright</item>
-        <item name="android:colorForeground">@android:color/holo_blue_bright</item>
+        <item name="colorAccent">#4099ff</item>
+        <item name="colorPrimaryDark">#4099ff</item>
+        <item name="android:colorForeground">#4099ff</item>
     </style>
 
     <style name="NoAction" parent="Theme.AppCompat.Light.NoActionBar">

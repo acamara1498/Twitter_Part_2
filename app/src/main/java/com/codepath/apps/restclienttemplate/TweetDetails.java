@@ -41,6 +41,9 @@ public class TweetDetails extends AppCompatActivity {
     TextView tvTime;
     TextView tvWhoReply;
     Tweet tweet;
+    String message;
+    long uid;
+    String screenName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +57,12 @@ public class TweetDetails extends AppCompatActivity {
         ivReply = (ImageView) findViewById(R.id.ivReply);
         tvWhoReply = (TextView) findViewById(R.id.tvWhoReply);
 
-        String screenName = getIntent().getStringExtra("screen_name");
+        screenName = getIntent().getStringExtra("screen_name");
         String userName = getIntent().getStringExtra("name");
         String body = getIntent().getStringExtra("body");
         String profileImageUrl = getIntent().getStringExtra("profileImageUrl");
         String createdAt = getIntent().getStringExtra("createdAt");
+        uid = getIntent().getLongExtra("tweet_id", 0);
 
         this.context = this;
 
@@ -69,7 +73,7 @@ public class TweetDetails extends AppCompatActivity {
 
 
         tvHandle2 = (TextView) findViewById(R.id.tvHandle2);
-        tvHandle2.setText(screenName);
+        tvHandle2.setText("@" +screenName);
 
         tvUserName2 = (TextView) findViewById(R.id.tvUserName2);
         tvUserName2.setText(userName);
@@ -79,7 +83,6 @@ public class TweetDetails extends AppCompatActivity {
 
         tvTime = (TextView) findViewById(R.id.tvTime);
         tvTime.setText(createdAt);
-
 
 
         tvWhoReply.setText("Replying to @"+ screenName);
@@ -128,8 +131,8 @@ public class TweetDetails extends AppCompatActivity {
 
     public void makeReply(View view) {
         client = TwitterApp.getRestClient();
-
-        client.sendTweet(etCompose2.getText().toString(), new JsonHttpResponseHandler()
+        message = ("@"+screenName + " "+etCompose2.getText().toString());
+        client.sendTweet(message, uid, new JsonHttpResponseHandler()
         {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response)
@@ -137,8 +140,7 @@ public class TweetDetails extends AppCompatActivity {
                 try {
                     // TODO
                     tweet = Tweet.fromJSON(response);
-                    Intent intent = new Intent();
-                    tweet.body = "@"+tweet.user.screenName + " "+ tweet.body;
+                    Intent intent = new Intent(TweetDetails.this, TimelineActivity.class);
                     intent.putExtra("tweet", Parcels.wrap(tweet));
                     setResult(RESULT_OK, intent);
                     finish();
@@ -146,8 +148,6 @@ public class TweetDetails extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                Intent data = new Intent(TweetDetails.this, TimelineActivity.class);
 
                 Log.d("TwitterClient", response.toString());
 

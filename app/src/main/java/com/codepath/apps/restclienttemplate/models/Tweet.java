@@ -21,6 +21,7 @@ public class Tweet {
     public long uid;// database id for the tweet
     public User user;
     public String createdAt;
+    String replyId;
     public String relativeDate;
 
     public Tweet(){
